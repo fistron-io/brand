@@ -1,5 +1,5 @@
 """The wordmark outlined from IBM Plex Sans 500, with the checkbox above the s,
-centred on the height of the centre of the dot on the i."""
+its bottom edge level with the bottom edge of the dot on the i."""
 import io, os
 import uharfbuzz as hb
 from fontTools.ttLib import TTFont
@@ -42,8 +42,7 @@ def wordmark_svg(color="#24305e"):
         for op,args in c: getattr(bp,op)(*args)
         return bp.bounds
     dot=max((bounds(c) for c in contours), key=lambda b:b[3])   # highest contour
-    dot_cy=-(dot[1]+dot[3])/2      # svg y (flipped)
-    size=0.32*upem; top=dot_cy-size/2
+    size=0.32*upem; top=-dot[1]-size   # bottom edge of the box on the bottom edge of the dot
     s_x0,s_x1=xs[2]; cx=(s_x0+s_x1)/2
     minx=0; maxx=width; miny=top; maxy=0
     pad=0.03*upem

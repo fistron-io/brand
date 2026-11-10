@@ -83,10 +83,11 @@ def lockup_svg(text=INDIGO, head=INDIGO):
     vb = [float(v) for v in re.search(r'viewBox="([^"]+)"', wm).group(1).split()]
     inner = re.sub(r'^<svg[^>]*>|</svg>$', '', wm)
     h, gap = 48, 10
-    wh = h * 0.66
-    ww = wh * vb[2] / vb[3]
+    k = h * 0.66 / 898          # font units -> mark units: cap height about 0.51 of the mark
+    baseline = h * 0.8705       # text baseline near the bottom of the head
+    wh, ww = vb[3] * k, vb[2] * k
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {h + gap + ww:.1f} {h}">{mark_inner(head, LEAF, WHITE, "lm")}'
-            f'<svg x="{h + gap}" y="{(h - wh) / 2 + 3:.1f}" width="{ww:.1f}" height="{wh:.1f}" viewBox="{" ".join(str(v) for v in vb)}">{inner}</svg></svg>')
+            f'<svg x="{h + gap}" y="{baseline + vb[1] * k:.2f}" width="{ww:.2f}" height="{wh:.2f}" viewBox="{" ".join(str(v) for v in vb)}">{inner}</svg></svg>')
 
 
 def png(svg_path, png_path, size):
