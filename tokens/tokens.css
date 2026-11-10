@@ -1,0 +1,109 @@
+/* Fistron brand tokens, generated from tokens.json by scripts/build.py. Do not edit. */
+:root {
+  --color-indigo: #24305e;
+  --color-night: #1a2347;
+  --color-night-deep: #10162e;
+  --color-night-line: #323c66;
+  --color-leaf: #3fa66b;
+  --color-leaf-text: #2b7a4b;
+  --color-leaf-light: #6ccb8f;
+  --color-paper: #f5f6f9;
+  --color-white: #ffffff;
+  --color-ink: #1b2033;
+  --color-ink-2: #3a415a;
+  --color-muted: #545b73;
+  --color-pending: #8a90a6;
+  --color-on-dark: #d7dceb;
+  --color-on-dark-muted: #a9b1cc;
+  --color-line: #dde1ea;
+  --color-line-soft: #e4e7ee;
+  --color-line-faint: #eef0f4;
+  --color-control: #c9cedb;
+  --color-indigo-tint: #e6e9f2;
+  --surface-page: #ffffff;
+  --surface-card: #ffffff;
+  --color-heading: #24305e;
+  --color-link-hover: #1a2347;
+  --color-brand-fill: #24305e;
+  --btn-bg: #24305e;
+  --btn-bg-hover: #1a2347;
+  --btn-fg: #ffffff;
+  --color-danger-text: #b42318;
+  --color-dashed: #b4bacb;
+  --status-passed: var(--color-leaf);
+  --status-failed: #d64545;
+  --status-quarantined: #f2c94c;
+  --status-warning: #e8a33a;
+  --status-skipped: var(--color-control);
+  --crow-body: #24305e;
+  --crow-wing: #1a2347;
+  --crow-beak: #4a5170;
+  --crow-leg: #3a415a;
+  --crow-outline: #1b2033;
+  --gutter: 32px;
+  --gutter-narrow: 20px;
+  --section-pad: 104px;
+  --section-pad-narrow: 72px;
+  --container: 1200px;
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-card: 12px;
+  --radius-panel: 14px;
+  --radius-checkbox: 22.5%;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+:root[data-theme="dark"] {
+  --color-indigo: #c9d0f2;
+  --color-leaf-text: #6ccb8f;
+  --color-paper: #121939;
+  --color-ink: #e8ebf4;
+  --color-ink-2: #c3cae0;
+  --color-muted: #a9b1cc;
+  --color-pending: #8a93b8;
+  --color-line: #2a3570;
+  --color-line-soft: #232c5e;
+  --color-line-faint: #1d2552;
+  --color-control: #3a4580;
+  --color-indigo-tint: #2a3570;
+  --surface-page: #0e1430;
+  --surface-card: #161e45;
+  --color-heading: #f2f4fc;
+  --color-link-hover: #ffffff;
+  --btn-bg: #6ccb8f;
+  --btn-bg-hover: #8ad8a6;
+  --btn-fg: #0e1430;
+  --color-danger-text: #ff9c94;
+  --color-dashed: #4a5590;
+  --crow-leg: #8a93b8;
+  --crow-outline: #c3cae0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-indigo: #c9d0f2;
+    --color-leaf-text: #6ccb8f;
+    --color-paper: #121939;
+    --color-ink: #e8ebf4;
+    --color-ink-2: #c3cae0;
+    --color-muted: #a9b1cc;
+    --color-pending: #8a93b8;
+    --color-line: #2a3570;
+    --color-line-soft: #232c5e;
+    --color-line-faint: #1d2552;
+    --color-control: #3a4580;
+    --color-indigo-tint: #2a3570;
+    --surface-page: #0e1430;
+    --surface-card: #161e45;
+    --color-heading: #f2f4fc;
+    --color-link-hover: #ffffff;
+    --btn-bg: #6ccb8f;
+    --btn-bg-hover: #8ad8a6;
+    --btn-fg: #0e1430;
+    --color-danger-text: #ff9c94;
+    --color-dashed: #4a5590;
+    --crow-leg: #8a93b8;
+    --crow-outline: #c3cae0;
+  }
+}

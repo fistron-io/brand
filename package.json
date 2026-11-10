@@ -1,0 +1,8 @@
+{
+  "name": "fistron-brand",
+  "private": true,
+  "description": "Fonts needed to build the Fistron wordmark outlines.",
+  "devDependencies": {
+    "@fontsource/ibm-plex-sans": "5.3.0"
+  }
+}
