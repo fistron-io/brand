@@ -150,7 +150,14 @@ def build_status():
         body = draw().replace('stroke="#24305e"', 'stroke="currentColor"')
         write(f"status/status-{name}.svg",
               f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" color="#24305e">{body}</svg>')
-    write("status/status.css", STATUS_CSS.strip() + "\n@media (prefers-reduced-motion: reduce) {\n  .st-spin, .st-dot, .st-wobble, .st-flip, .st-stripe { animation: none !important; }\n}")
+    css = STATUS_CSS.strip() + "\n@media (prefers-reduced-motion: reduce) {\n  .st-spin, .st-dot, .st-wobble, .st-flip, .st-stripe { animation: none !important; }\n}"
+    write("status/status.css", css)
+    # Self-contained versions: the animation is inside the file, so they move as <img> too.
+    inline_css = " ".join(line.strip() for line in css.splitlines())
+    for name, draw in ICONS.items():
+        body = draw().replace('stroke="#24305e"', 'stroke="currentColor"')
+        write(f"status/animated/status-{name}.svg",
+              f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" color="#24305e"><style>{inline_css}</style>{body}</svg>')
 
 
 # ---------------------------------------------------------------- tokens

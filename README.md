@@ -79,7 +79,7 @@ Rules: only one part moves; loops are calm (0.35-3 s); everything stops under `p
 
 ## Status icons
 
-Rounded squares on a 24 grid (20px box, `radius-checkbox`), in `status/status-<state>.svg`, animated by the classes in `status/status.css` when inlined. Shape tells the state; colour confirms it.
+Rounded squares on a 24 grid (20px box, `radius-checkbox`), in `status/status-<state>.svg`, animated by the classes in `status/status.css` when inlined; `status/animated/status-<state>.svg` carry their animation inside and move even as `<img>`. Shape tells the state; colour confirms it.
 
 | State | Icon | Moves |
 | --- | --- | --- |
@@ -103,7 +103,7 @@ Rule: **only states that can still change on their own move**; final states are 
 | `tokens/tokens.css` | Generated CSS custom properties. Names follow the fistron.io stylesheet: colours get a `color-` prefix (`--color-indigo`), except `surface-*`, `btn-*`, `status-*` and `crow-*`. Dark values under `[data-theme="dark"]` and `prefers-color-scheme: dark`. |
 | `logo/` | Marks, wordmark, lockup, `favicon.svg` (follows the system theme), `favicon-32.png`, `app-icon.svg`, `apple-touch-icon.png`, `app-icon-512.png`. |
 | `mascot/` | Eleven animated poses, `fistronek.css` (their animation), `static/` still versions. |
-| `status/` | Nine status icons and `status.css` (their animation). |
+| `status/` | Nine status icons and `status.css` (their animation) for inlining in the GUI; `status/animated/` the same icons with the animation inside the file, for `<img>` (website, docs, README). |
 | `scripts/` | The generators every file above comes from. |
 
 ## Using it
