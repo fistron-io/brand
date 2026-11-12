@@ -47,7 +47,7 @@ Rules:
 
 ## Wordmark
 
-"Fistron" set in IBM Plex Sans 500, tracking -0.01em, with the brand checkbox **above the s**: the checkbox is 0.32em square and its bottom edge is level with the bottom edge of the dot on the i, so the two sit on one line and the box rises above the F. Use the SVG asset; when it must be live text (the website header at 26px), wrap the s in a relatively positioned span and place the checkbox with `position: absolute; left: 50%; top: -0.058em; width: 0.32em; height: 0.32em; transform: translateX(-50%)`. The old placement where the ® would sit is retired.
+"Fistron" set in IBM Plex Sans 500, tracking -0.01em, with the brand checkbox **above the s**: the checkbox is 0.32em square and its bottom edge is level with the bottom edge of the dot on the i, so the two sit on one line and the box rises above the F. Use the SVG asset; when it must be live text (the website header at 26px), wrap the s in a relatively positioned span and place the checkbox with `position: absolute; left: 50%; top: 0.105em; width: 0.32em; height: 0.32em; transform: translateX(-50%)` (the span's content area starts 1.0385em above the baseline in IBM Plex Sans, and the dot's bottom edge is 0.613em above it: 1.0385 - 0.613 - 0.32 = 0.105em). The old placement where the ® would sit is retired.
 
 ## The checkbox
 
