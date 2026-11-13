@@ -1,9 +1,9 @@
-"""The eleven Fištrónek poses in the brand style C, each with one moving part."""
+"""The seventeen Fištrónek poses in the brand style C, each with one moving part."""
 from skeleton import *
 import skeleton as gen
 V="C"
 LEG="#3a415a"; LINE="#c9cedb"; PEND="#8a90a6"; TAPE="#f2c94c"; STEAM="#a9b1cc"
-BROOM="#8a6a45"; STRAW="#c9a15b"; STRAW_LINE="#a8823f"
+BROOM="#8a6a45"; STRAW="#c9a15b"; STRAW_LINE="#a8823f"; BULB="#ffe27a"; LAMP="#f2c94c"; CLOUD="#eef0f7"
 
 def S(dark): return style_for(V,dark)
 def oc(dark): return INK if not dark else "#c3cae0"   # outline colour
@@ -80,7 +80,64 @@ def P(name,dark=False):
                 f'<g transform="translate(154 126) scale(0.76)"><g class="shake">{flaky(V,dark)}</g></g>'+tape(143,-8)+tape(154,7)+
                 f'<g class="pulse" style="transform-origin:188px 90px"><circle cx="188" cy="90" r="7" fill="{LEAF}"{ow(dark,2)}/><path d="M185.5 86.5 L191 90 L185.5 93.5 Z" fill="#fff"/></g>')
 
-ALL=["main","investigating","skeptical","chase","telescope","broom","stamp","conductor","chef","desk","quarantine"]
+    if name=="working":
+        # in development: he hammers a checkbox that is not finished yet (dashed, half a tick)
+        ham=(f'<g class="hammer" style="transform-origin:100px 112px">'+sh("M94 112 Q118 96 140 88 L146 98 Q122 110 100 126 Z",s["wing"],s)+
+             f'<path d="M140 92 L162 124" stroke="{BROOM}" stroke-width="6" stroke-linecap="round"/>'
+             f'<path d="M149 128.5 L156 138.5 L180 121.5 L173 111.5 Z" fill="{LEG}"{ow(dark,2.5)}/></g>')
+        box=(f'<rect x="142" y="138" width="30" height="30" rx="6.75" fill="none" stroke="{PEND}" stroke-width="3" stroke-dasharray="6 5"/>'
+             f'<path d="M148.75 153 L154.75 159" stroke="{LEAF}" stroke-width="4.2" stroke-linecap="round"/>')
+        return shadow(60,dark)+f'<g transform="translate(-14 0)">{crow(V,dark,dict(px=4,py=4,brow="M112 54 Q124 50 136 58"),wing=ham)}</g>'+box
+    if name=="lightbulb":
+        # fištrón: wit; the idea lights up above his head
+        glow=(f'<g class="glow"><path d="M160 6 V0 M182 16 L188 11 M138 16 L132 11 M190 36 H197 M130 36 H123" stroke="{LAMP}" stroke-width="3" stroke-linecap="round"/>'
+              f'<circle cx="160" cy="34" r="14" fill="{BULB}"/></g>')
+        bulb=(f'<circle cx="160" cy="34" r="14" fill="#fff" fill-opacity="0.35"{ow(dark,2.5)}/>{glow}'
+              f'<path d="M155 36 L158 40 L160 36 L162 40 L165 36" stroke="{LEG}" stroke-width="1.6" fill="none" stroke-linejoin="round"/>'
+              f'<rect x="153.5" y="47" width="13" height="9" rx="2" fill="{LEG}"{ow(dark,2)}/>')
+        w=wingpath("M92 112 Q118 100 138 96 L142 106 Q118 116 98 128 Z",dark)
+        return shadow(46,dark)+crow(V,dark,dict(big=True,px=1,py=-3,brow="M112 50 Q124 42 136 50"),wing=w,item=bulb)
+    if name=="cloud":
+        # on a platform's cloud, inside their service, with the checkbox to offer
+        cl=(f'<path d="M22 182 Q10 160 36 158 Q42 142 64 148 Q76 132 100 142 Q120 130 136 146 Q160 140 166 160 Q190 160 182 182 Z" fill="{CLOUD}"{ow(dark)}/>')
+        w=wingpath("M92 112 Q122 98 148 92 L152 102 Q124 114 98 128 Z",dark)
+        body=crow(V,dark,dict(px=3,py=0,brow="M112 56 Q124 50 136 57"),wing=w,item=cb(150,78,22,dark,""))
+        return f'<g class="float">{body}{cl}</g>'
+    if name=="abacus":
+        # the price per active committer: he counts them on an abacus
+        rods="".join(f'<path d="M140 {y} H196" stroke="{LEG}" stroke-width="2.5"/>' for y in (116,134,152))
+        beads=("".join(f'<circle cx="{x}" cy="116" r="5.5" fill="{IND}"{ow(dark,1.5)}/>' for x in (148,159))
+               +"".join(f'<circle cx="{x}" cy="134" r="5.5" fill="{IND}"{ow(dark,1.5)}/>' for x in (148,159,170))
+               +f'<circle cx="148" cy="152" r="5.5" fill="{IND}"{ow(dark,1.5)}/>'
+               +f'<g class="slide"><circle cx="188" cy="116" r="5.5" fill="{LEAF}"{ow(dark,1.5)}/></g>')
+        frame=(f'<rect x="134" y="102" width="68" height="64" rx="5" fill="none" stroke="{BROOM}" stroke-width="5"/>'
+               f'<path d="M140 166 V176 M196 166 V176" stroke="{BROOM}" stroke-width="5" stroke-linecap="round"/>')
+        w=wingpath("M92 112 Q116 104 132 110 L134 120 Q116 120 98 128 Z",dark)
+        body=crow(V,dark,dict(px=5,py=4,brow="M112 54 Q124 48 136 56"),wing=w)
+        return shadow(66,dark)+f'<g transform="translate(-20 0)">{body}</g>'+rods+beads+frame
+    if name=="journey":
+        # the roadmap: on the road with his bundle, the road passing under him
+        bundle=(f'<path d="M128 96 L60 50" stroke="{BROOM}" stroke-width="4" stroke-linecap="round"/>'
+                f'<path d="M62 50 Q44 32 56 28 Q68 24 74 40 Q84 46 68 58 Q56 62 62 50 Z" fill="{LEAF}"{ow(dark,2.5)}/>')
+        stick=sh("M96 108 Q114 96 126 92 L132 100 Q118 110 102 124 Z",s["wing"],s)
+        road=(f'<path d="M0 176 H200" stroke="{LINE}" stroke-width="6" stroke-linecap="round"/>'
+              f'<path class="road" d="M-20 176 H220" stroke="#fff" stroke-width="2" stroke-dasharray="10 10"/>')
+        post=(f'<path d="M184 176 V120" stroke="{BROOM}" stroke-width="4" stroke-linecap="round"/>'
+              f'<path d="M168 114 H196 L200 122 L196 130 H168 Z" fill="#fff"{ow(dark,2)}/>{cb(172,116,12,dark,"")}')
+        return road+post+crow(V,dark,dict(px=4,py=-1,brow="M112 54 Q124 48 136 54"),wing=stick,back=bundle)
+    if name=="clipboard":
+        # what each plan includes: he checks the list, the last item gets its tick
+        board=(f'<g transform="rotate(8 166 118)"><rect x="140" y="80" width="52" height="70" rx="5" fill="{BROOM}"{ow(dark,2)}/>'
+               f'<rect x="145" y="88" width="42" height="57" rx="2" fill="#fff"/><rect x="156" y="76" width="20" height="9" rx="3" fill="{LEG}"{ow(dark,1.5)}/>'
+               f'<rect x="150" y="94" width="8" height="8" rx="1.8" fill="{LEAF}"/><path d="M162 98 H182" stroke="{LINE}" stroke-width="3" stroke-linecap="round"/>'
+               f'<rect x="150" y="108" width="8" height="8" rx="1.8" fill="{LEAF}"/><path d="M162 112 H178" stroke="{LINE}" stroke-width="3" stroke-linecap="round"/>'
+               f'<rect x="150.5" y="122.5" width="7" height="7" rx="1.6" fill="none" stroke="{PEND}" stroke-width="1.2"/><rect class="tick" x="150" y="122" width="8" height="8" rx="1.8" fill="{LEAF}"/>'
+               f'<path d="M162 126 H184" stroke="{LINE}" stroke-width="3" stroke-linecap="round"/></g>')
+        w=wingpath("M92 112 Q118 106 142 112 L142 122 Q118 122 98 128 Z",dark)
+        return shadow(56,dark)+f'<g transform="translate(-14 0)">{crow(V,dark,dict(big=True,px=5,py=4,brow="M112 52 Q124 46 136 54"),wing=w)}</g>'+board
+
+ALL=["main","investigating","skeptical","chase","telescope","broom","stamp","conductor","chef","desk","quarantine",
+     "working","lightbulb","cloud","abacus","journey","clipboard"]
 EXTRA_CSS="""
 .sweep2{animation:sweep2 1.4s ease-in-out infinite alternate}
 @keyframes sweep2{from{transform:rotate(-6deg)}to{transform:rotate(8deg)}}
@@ -103,4 +160,12 @@ EXTRA_CSS="""
 @keyframes shake{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
 .pulse{animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.hammer{animation:hammer 1.2s ease-in infinite}
+@keyframes hammer{0%,30%{transform:rotate(-26deg)}45%{transform:rotate(0)}52%{transform:rotate(-5deg)}60%,100%{transform:rotate(-26deg)}}
+.glow{animation:glow 2.8s ease-in-out infinite}
+@keyframes glow{0%,35%{opacity:0}45%{opacity:1}52%{opacity:.4}60%,92%{opacity:1}100%{opacity:0}}
+.slide{animation:slide 2.4s ease-in-out infinite}
+@keyframes slide{0%,25%{transform:translateX(0)}50%,85%{transform:translateX(-18px)}100%{transform:translateX(0)}}
+.road{animation:road .8s linear infinite}
+@keyframes road{from{transform:translateX(0)}to{transform:translateX(-20px)}}
 """

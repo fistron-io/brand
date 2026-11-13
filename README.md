@@ -57,7 +57,7 @@ One shape is the brand: a rounded square, corner `radius-checkbox` (22.5% of the
 
 A crow in the "C" style: flat fills in two indigo shades (`crow-body`, `crow-wing`), beak `crow-beak`, a 3px `crow-outline` around every shape (light outline on dark pages, so no glow or rim effect is needed). He is built from eight parts (body, head, tuft, beak, eye with brow, wing, tail, legs) on one skeleton, so a new pose reuses them.
 
-Eleven poses, each with one moving part. `mascot/fistronek-<pose>.svg` are animated and follow the page theme through `--crow-outline`, `--crow-leg` and `--color-indigo` when inlined; `mascot/static/` holds still versions for light grounds and `-on-dark` versions for dark grounds:
+Seventeen poses, each with one moving part. `mascot/fistronek-<pose>.svg` are animated and follow the page theme through `--crow-outline`, `--crow-leg` and `--color-indigo` when inlined; `mascot/static/` holds still versions for light grounds and `-on-dark` versions for dark grounds:
 
 | Pose | Moves | Use |
 | --- | --- | --- |
@@ -72,8 +72,14 @@ Eleven poses, each with one moving part. `mascot/fistronek-<pose>.svg` are anima
 | chef | stirs, steam | setup wizard, "cooking" |
 | desk | types, task gets ticked | local UI, reports |
 | quarantine | Flaky shakes behind tape | quarantined tests |
+| working | hammers a checkbox that is not finished yet | "In development", beside its label (36px at least) |
+| lightbulb | the bulb lights up | wit, ideas: Why Fistron |
+| cloud | floats on a platform's cloud, a checkbox to offer | platform partners, hosted services |
+| abacus | a bead slides | counting active committers: pricing |
+| journey | the road passes under him | the roadmap, a journey's steps |
+| clipboard | the last item gets its tick | what a plan or a list includes |
 
-Rules: only one part moves; loops are calm (0.35-3 s); everything stops under `prefers-reduced-motion`. He illustrates, he never replaces a status icon, and he never appears in a headline or next to pricing.
+Rules: only one part moves; loops are calm (0.35-3 s); everything stops under `prefers-reduced-motion`. He illustrates, he never replaces a status icon, and he never appears in a headline. On a pricing page he illustrates a section beside its heading, and works (`working`) beside what is in development; never beside a price.
 
 **Flaky** is the flaky-test gremlin: a round, spiky creature split down the middle, red (`status-failed`) left and leaf right. He appears only with the flaky state or in the mascot's scenes, never as a generic error.
 
@@ -102,7 +108,7 @@ Rule: **only states that can still change on their own move**; final states are 
 | `tokens/tokens.json` | The tokens (source). Colours with light and dark values, type scale, spacing, radii. |
 | `tokens/tokens.css` | Generated CSS custom properties. Names follow the fistron.io stylesheet: colours get a `color-` prefix (`--color-indigo`), except `surface-*`, `btn-*`, `status-*` and `crow-*`. Dark values under `[data-theme="dark"]` and `prefers-color-scheme: dark`. |
 | `logo/` | Marks, wordmark, lockup, `favicon.svg` (follows the system theme), `favicon-32.png`, `app-icon.svg`, `apple-touch-icon.png`, `app-icon-512.png`. |
-| `mascot/` | Eleven animated poses, `fistronek.css` (their animation), `static/` still versions. |
+| `mascot/` | Seventeen animated poses, `fistronek.css` (their animation), `static/` still versions. |
 | `status/` | Nine status icons and `status.css` (their animation) for inlining in the GUI; `status/animated/` the same icons with the animation inside the file, for `<img>` (website, docs, README). |
 | `scripts/` | The generators every file above comes from. |
 
