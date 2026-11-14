@@ -57,7 +57,7 @@ One shape is the brand: a rounded square, corner `radius-checkbox` (22.5% of the
 
 A crow in the "C" style: flat fills in two indigo shades (`crow-body`, `crow-wing`), beak `crow-beak`, a 3px `crow-outline` around every shape (light outline on dark pages, so no glow or rim effect is needed). He is built from eight parts (body, head, tuft, beak, eye with brow, wing, tail, legs) on one skeleton, so a new pose reuses them.
 
-Seventeen poses, each with one moving part. `mascot/fistronek-<pose>.svg` are animated and follow the page theme through `--crow-outline`, `--crow-leg` and `--color-indigo` when inlined; `mascot/static/` holds still versions for light grounds and `-on-dark` versions for dark grounds:
+Thirty-four poses. A pose moves one part or tells a short story (several parts one after another: he sips, the checkbox hops, he blinks). `mascot/fistronek-<pose>.svg` are animated and follow the page theme through `--crow-outline`, `--crow-leg` and `--color-indigo` when inlined; `mascot/static/` holds still versions for light grounds and `-on-dark` versions for dark grounds:
 
 | Pose | Moves | Use |
 | --- | --- | --- |
@@ -72,14 +72,31 @@ Seventeen poses, each with one moving part. `mascot/fistronek-<pose>.svg` are an
 | chef | stirs, steam | setup wizard, "cooking" |
 | desk | types, task gets ticked | local UI, reports |
 | quarantine | Flaky shakes behind tape | quarantined tests |
-| working | hammers a checkbox that is not finished yet | "In development", beside its label (36px at least) |
+| working | hammers a checkbox that is not finished yet | "In development", beside its label (28px at least) |
 | lightbulb | the bulb lights up | wit, ideas: Why Fistron |
 | cloud | floats on a platform's cloud, a checkbox to offer | platform partners, hosted services |
 | abacus | a bead slides | counting active committers: pricing |
 | journey | the road passes under him | the roadmap, a journey's steps |
 | clipboard | the last item gets its tick | what a plan or a list includes |
+| coffee | leans on the finished checkbox, hammer put away, sips from a mug | "Available now", beside its label, the same size and place as `working` |
+| redpen | red pen over a diff, with glasses; the pen scribbles | PR/MR review, the team's rules, AI code review |
+| teacher | graduate's cap, a blackboard; the pointer taps | Become a developer, Line by line, the learning path |
+| empty | looks into an empty box; a moth flies out | empty states: no runs, findings or projects yet |
+| hourglass | an hourglass; the sand runs | a long wait: an analysis runs, an agent collects evidence |
+| lost | holds the map upside down; a question mark floats | page not found, no permission |
+| megaphone | a megaphone; sound waves | reporting a problem in Fistron |
+| juggle | juggles three checkboxes; they hop | everything passed: a big summary, the end of a guide |
+| memory | a filing cabinet, a card in his wing; a drawer slides | Fistron Memory |
+| scales | scales with two models; they tilt | choosing a model, benchmarking models |
+| remote | a remote control; a small agent drives | agents, endpoints |
+| alarm | a nightcap; the alarm clock rings | schedules, nightly runs |
+| piggy | a piggy bank; a coin drops | tokens saved, usage and credit |
+| suitcase | a straw hat and a suitcase with stickers; the case swings | Software Migration Assurance |
+| plane | throws a paper plane with a checkbox; it glides | Distributed Continuous Verification |
+| newspaper | the morning paper with the results; the sun rises | the Daily CI review |
+| grow | waters a plant with a checkbox for a flower; it grows | Expand and grow your business |
 
-Rules: only one part moves; loops are calm (0.35-3 s); everything stops under `prefers-reduced-motion`. He illustrates, he never replaces a status icon, and he never appears in a headline. On a pricing page he illustrates a section beside its heading, and works (`working`) beside what is in development; never beside a price.
+Rules: one part moves, or a short story of a few parts one after another (since 2026-11-14; the earlier poses stay as they are); loops are calm (0.35-3.5 s) and nothing flashes; everything stops under `prefers-reduced-motion`, and the still pose reads on its own. He illustrates, he never replaces a status icon, and he never appears in a headline, in a table's row or beside a price; the green checkbox means only checked, passed, OK. On a pricing page he illustrates a section beside its heading, works (`working`) beside what is in development and has his coffee (`coffee`) beside what is available now; the status icon beside the label stays and does not move. `hourglass` illustrates a long wait, never instead of the `running` icon, which stays in rows and chips. The figures in his lines (40 MB, 02:00, "last March") are examples: a page gives the real value it knows, else leaves the figure out.
 
 **Flaky** is the flaky-test gremlin: a round, spiky creature split down the middle, red (`status-failed`) left and leaf right. He appears only with the flaky state or in the mascot's scenes, never as a generic error.
 
@@ -124,7 +141,7 @@ pip install -r scripts/requirements.txt
 python3 scripts/build.py
 ```
 
-Change the sources (`tokens/tokens.json`, `scripts/*.py`), never the generated files. The wordmark is outlined from IBM Plex Sans 500 (`@fontsource/ibm-plex-sans`); PNG icons need `rsvg-convert` (librsvg). A new pose reuses the skeleton in `scripts/skeleton.py` and goes into `scripts/poses.py` with exactly one moving part.
+Change the sources (`tokens/tokens.json`, `scripts/*.py`), never the generated files. The wordmark is outlined from IBM Plex Sans 500 (`@fontsource/ibm-plex-sans`); PNG icons need `rsvg-convert` (librsvg). A new pose reuses the skeleton in `scripts/skeleton.py` and goes into `scripts/poses.py` (one moving part, or a short story; calm and readable when still).
 
 ## Licence
 
