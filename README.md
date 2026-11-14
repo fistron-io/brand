@@ -45,6 +45,15 @@ Rules:
 - Don't recolour the head (indigo, white or one ink only), don't outline it, don't add the eyebrow or other pose details to the mark, don't put the checkbox anywhere else.
 - No effects: no shadow, gradient, rotation or stretching.
 
+## Co-branding: a customer's logo beside Fistron's
+
+An organisation may put its own logo beside Fistron's and, from Business, its colours on Fistron's interface (Fistron ADR 0168). It is co-branding, never a white label: that stays with the partners' OEM channel (ADR 0064).
+
+- **Placement:** the customer's logo left of Fistron's wordmark, a 1px divider in `line` between them, the clear zone on each side of the divider the wordmark's checkbox height (12px in the 28px header). The customer's logo is never taller than the wordmark's height and never wider than 160px in the header.
+- **The customer's logo** is shown as the customer gave it: never recoloured, cropped or redrawn by Fistron. Without a dark variant it stands on a white plate in the dark theme.
+- **The customer's colours** go only to role tokens: `accent` (the primary buttons, links and the brand's borders, its text white or `ink` by contrast), `heading` and `surface-page`, each for the light and the dark theme, readable at WCAG AA (4.5:1 for text) or moved until they are.
+- **Never recoloured by a customer:** the wordmark and the mark, Fištrónek (`crow-*`), the status icons and the `status-*` colours, the checkbox. A green box is passed and a red X box is failed for every organisation.
+
 ## Wordmark
 
 "Fistron" set in IBM Plex Sans 500, tracking -0.01em, with the brand checkbox **above the s**: the checkbox is 0.32em square and its bottom edge is level with the bottom edge of the dot on the i, so the two sit on one line and the box rises above the F. Use the SVG asset; when it must be live text (the website header at 26px), wrap the s in a relatively positioned span and place the checkbox with `position: absolute; left: 50%; top: 0.105em; width: 0.32em; height: 0.32em; transform: translateX(-50%)` (the span's content area starts 1.0385em above the baseline in IBM Plex Sans, and the dot's bottom edge is 0.613em above it: 1.0385 - 0.613 - 0.32 = 0.105em). The old placement where the ® would sit is retired.
