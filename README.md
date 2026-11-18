@@ -125,7 +125,19 @@ Rounded squares on a 24 grid (20px box, `radius-checkbox`), in `status/status-<s
 | manual / not observed | dashed pending outline, dot | no |
 | warning / needs input | amber box, ink "!" | no |
 
-Rule: **only states that can still change on their own move**; final states are still. Sizes 16, 20 and 24px in tables and chips, 32px in legends. In big summaries, empty states and notifications use the head mark: holding the leaf checkbox when everything passed, frowning with a red X box when something failed. The head never goes into table rows.
+Rule: **only states that can still change on their own move**; final states are still. Sizes 16, 20 and 24px in tables and chips, 32px in legends.
+
+### The head in a big state
+
+In big summaries, empty states and notifications the state is told by the head, on the mark's 48 grid, in `status/head-<state>.svg` (inlined, the head takes the page's colour through `currentColor`) and `status/head-<state>-on-dark.svg` (white head, for `<img>` on dark grounds):
+
+| State | Head | Box |
+| --- | --- | --- |
+| passed | the mark's head | leaf checkbox, white tick |
+| failed | frowning: the top of the eye cut on a slant down to the beak, the tuft laid back, the beak turned down | red box, white X |
+| unknown | the mark's head | dashed `pending` outline with a dot, as `manual / not observed` |
+
+The frowning head is a state, never the logo: the mark keeps its one face. The heads do not move. 32px at least, always beside a text that says the state; never in a table's row, where the status icons stand.
 
 ## Repository layout
 
@@ -135,7 +147,7 @@ Rule: **only states that can still change on their own move**; final states are 
 | `tokens/tokens.css` | Generated CSS custom properties. Names follow the fistron.io stylesheet: colours get a `color-` prefix (`--color-indigo`), except `surface-*`, `btn-*`, `status-*` and `crow-*`. Dark values under `[data-theme="dark"]` and `prefers-color-scheme: dark`. |
 | `logo/` | Marks, wordmark, lockup, `favicon.svg` (follows the system theme), `favicon-32.png`, `app-icon.svg`, `apple-touch-icon.png`, `app-icon-512.png`. |
 | `mascot/` | Seventeen animated poses, `fistronek.css` (their animation), `static/` still versions. |
-| `status/` | Nine status icons and `status.css` (their animation) for inlining in the GUI; `status/animated/` the same icons with the animation inside the file, for `<img>` (website, docs, README). |
+| `status/` | Nine status icons and `status.css` (their animation) for inlining in the GUI; `status/animated/` the same icons with the animation inside the file, for `<img>` (website, docs, README). The three heads of a big state (`head-passed`, `head-failed`, `head-unknown`) and their `-on-dark` versions. |
 | `scripts/` | The generators every file above comes from. |
 
 ## Using it

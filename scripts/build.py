@@ -160,6 +160,51 @@ def build_status():
               f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" color="#24305e"><style>{inline_css}</style>{body}</svg>')
 
 
+# ---------------------------------------------------------------- the head in a big state
+
+RED = "#d64545"
+PENDING = "#8a90a6"
+HEADS = ("passed", "failed", "unknown")
+
+
+def head_inner(head, state, uid="h"):
+    """The head mark telling a big state (a summary, an empty state, a notification):
+    holding the leaf checkbox when everything passed; frowning (the eye's top cut on a
+    slant, the tuft laid back, the beak turned down) with the red X box when something
+    failed; holding the dashed box when the state is not known. Never in a table's row."""
+    frown = state == "failed"
+    lid = '<path d="M14 9 H31 V21.2 L14 12.6 Z" fill="#fff"/>' if frown else ""
+    pupil = (f'<circle cx="23.3" cy="21.3" r="2.3" fill="{head}"/>' if frown
+             else f'<circle cx="23.6" cy="20.2" r="2.4" fill="{head}"/>')
+    tuft = "M10 15.5 L8.2 8 L16 10.6 Z" if frown else "M11.5 13 L13 5.5 L18.5 10 Z"
+    beak = "M28 16.5 L44 24 L28 29 Z" if frown else "M28 15.5 L44 22 L28 28.5 Z"
+    box = {
+        "passed": (f'<rect x="26.5" y="27.5" width="19" height="19" rx="4.5" fill="{LEAF}"/>'
+                   f'<path d="M30.8 37 L34.5 40.7 L41.2 33.3" stroke="{WHITE}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'),
+        "failed": (f'<rect x="26.5" y="27.5" width="19" height="19" rx="4.5" fill="{RED}"/>'
+                   f'<path d="M32 33 L40 41 M40 33 L32 41" stroke="{WHITE}" stroke-width="3" stroke-linecap="round" fill="none"/>'),
+        "unknown": (f'<rect x="27.4" y="28.4" width="17.2" height="17.2" rx="4.2" fill="none" stroke="{PENDING}" stroke-width="1.8" stroke-dasharray="3 2.4"/>'
+                    f'<circle cx="36" cy="37" r="1.7" fill="{PENDING}"/>'),
+    }[state]
+    return (
+        f'<defs><mask id="{uid}" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">'
+        f'<rect width="48" height="48" fill="#fff"/><circle cx="22" cy="19.5" r="4.8" fill="#000"/>{lid}'
+        f'<rect x="26.5" y="27.5" width="19" height="19" rx="4.5" fill="#000" stroke="#000" stroke-width="2.6"/></mask></defs>'
+        f'<g mask="url(#{uid})" fill="{head}"><path d="{tuft}" stroke="{head}" stroke-width="1.8" stroke-linejoin="round"/>'
+        f'<circle cx="19" cy="22" r="13"/><path d="{beak}" stroke="{head}" stroke-width="1.8" stroke-linejoin="round"/></g>'
+        f'{pupil}{box}'
+    )
+
+
+def build_heads():
+    for state in HEADS:
+        # inlined, the head takes the page's colour (indigo, white in the dark theme)
+        write(f"status/head-{state}.svg",
+              f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" color="{INDIGO}">{head_inner("currentColor", state)}</svg>')
+        write(f"status/head-{state}-on-dark.svg",
+              f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">{head_inner(WHITE, state)}</svg>')
+
+
 # ---------------------------------------------------------------- tokens
 
 def build_tokens():
@@ -197,4 +242,5 @@ if __name__ == "__main__":
     build_logo()
     build_mascot()
     build_status()
+    build_heads()
     print("done")
