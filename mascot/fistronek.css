@@ -70,3 +70,11 @@
 @keyframes rise{from{transform:translateY(16px)}to{transform:translateY(-4px)}}
 .sprout{animation:sprout 3s ease-in-out infinite alternate}
 @keyframes sprout{from{transform:scale(.62)}to{transform:scale(1)}}
+.pace{animation:pace 3.5s ease-in-out infinite}
+@keyframes pace{0%,100%{transform:translateX(-12px)}30%{transform:translateX(12px)}60%{transform:translateX(-12px)}}
+.stepl{animation:stepl 3.5s linear infinite}
+@keyframes stepl{0%,15%,30%,45%,60%,100%{transform:rotate(0)}7.5%,37.5%{transform:rotate(14deg)}22.5%,52.5%{transform:rotate(-14deg)}}
+.stepr{animation:stepr 3.5s linear infinite}
+@keyframes stepr{0%,15%,30%,45%,60%,100%{transform:rotate(0)}7.5%,37.5%{transform:rotate(-14deg)}22.5%,52.5%{transform:rotate(14deg)}}
+.check{animation:check 3.5s ease-in-out infinite}
+@keyframes check{0%,56%{transform:rotate(34deg)}68%,92%{transform:rotate(0)}100%{transform:rotate(34deg)}}

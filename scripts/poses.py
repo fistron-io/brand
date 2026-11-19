@@ -1,6 +1,7 @@
-"""The thirty-four Fištrónek poses in the brand style C. A pose moves one part or
-tells a short story (several parts one after another); the loop stays calm and
-the pose still reads when nothing moves (2026-11-14)."""
+"""The thirty-five Fištrónek poses in the brand style C. A pose moves as many
+parts as its story needs (since 2026-11-18; one part, or several one after
+another, before); the loop stays calm and the pose still reads when nothing
+moves."""
 from skeleton import *
 import skeleton as gen
 V="C"
@@ -294,6 +295,20 @@ def N(name, dark=False):
                + line("M166 100 L168 108 M170 97 L174 105", STEAM, 2.2))
         w = wingpath("M92 112 Q112 104 126 102 L130 112 Q114 116 98 128 Z", dark, extra=can)
         return shadow(64, dark) + plant + pot + f'<g transform="translate(-18 0)">{crow(V, dark, dict(px=4, py=3, brow="M112 54 Q124 48 136 54"), wing=w)}</g>'
+
+    # ------------------------------------------------ 2026-11-18: waiting for a work (finding 156)
+    if name == "waiting":
+        # he paces left and right, stops and looks at the watch on his wing; still, he looks at it
+        watch = (f'<rect x="116" y="84" width="12" height="17" rx="3" fill="{LEG}"{ow(dark,1.8)}/>'
+                 f'<circle cx="122" cy="92.5" r="9" fill="#fff"{ow(dark,2.5)}/>' + line("M122 92.5 V87 M122 92.5 L126 95", INK, 2))
+        w = wingpath("M88 112 Q100 94 114 86 L130 98 Q116 116 98 130 Z", dark, "check", "96px 120px", watch)
+        body = crow(V, dark, dict(px=-1, py=5, brow="M112 58 Q124 55 136 60"), wing=w)
+        # each leg on its own, so that they step; behind the body, as in every pose
+        steps = "".join(
+            f'<g class="step{side}" style="transform-origin:{hip}"><path d="{d}" stroke="{LEG if not dark else "#8a93b8"}" stroke-width="5" stroke-linecap="round" fill="none"/></g>'
+            for side, hip, d in (("l", "86px 151px", "M86 151 L84 168 M76 168 H92"), ("r", "102px 151px", "M102 151 L104 168 M98 168 H112")))
+        body = body.replace(gen.legs(s, V, dark), steps)
+        return f'<g class="pace">{shadow(44, dark)}<g transform="translate(-6 0)">{body}</g></g>'
     raise KeyError(name)
 
 NEW_CSS = """
@@ -324,8 +339,16 @@ NEW_CSS = """
 @keyframes rise{from{transform:translateY(16px)}to{transform:translateY(-4px)}}
 .sprout{animation:sprout 3s ease-in-out infinite alternate}
 @keyframes sprout{from{transform:scale(.62)}to{transform:scale(1)}}
+.pace{animation:pace 3.5s ease-in-out infinite}
+@keyframes pace{0%,100%{transform:translateX(-12px)}30%{transform:translateX(12px)}60%{transform:translateX(-12px)}}
+.stepl{animation:stepl 3.5s linear infinite}
+@keyframes stepl{0%,15%,30%,45%,60%,100%{transform:rotate(0)}7.5%,37.5%{transform:rotate(14deg)}22.5%,52.5%{transform:rotate(-14deg)}}
+.stepr{animation:stepr 3.5s linear infinite}
+@keyframes stepr{0%,15%,30%,45%,60%,100%{transform:rotate(0)}7.5%,37.5%{transform:rotate(-14deg)}22.5%,52.5%{transform:rotate(14deg)}}
+.check{animation:check 3.5s ease-in-out infinite}
+@keyframes check{0%,56%{transform:rotate(34deg)}68%,92%{transform:rotate(0)}100%{transform:rotate(34deg)}}
 """
-NEW = ["coffee","redpen","teacher","empty","hourglass","lost","megaphone","juggle","memory","scales","remote","alarm","piggy","suitcase","plane","newspaper","grow"]
+NEW = ["coffee","redpen","teacher","empty","hourglass","lost","megaphone","juggle","memory","scales","remote","alarm","piggy","suitcase","plane","newspaper","grow","waiting"]
 
 
 ALL=["main","investigating","skeptical","chase","telescope","broom","stamp","conductor","chef","desk","quarantine",
