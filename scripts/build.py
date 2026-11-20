@@ -163,16 +163,20 @@ def build_status():
 # ---------------------------------------------------------------- the head in a big state
 
 RED = "#d64545"
+AMBER = "#e8a33a"  # status-warning: needs input
+INK = "#1b2033"
 PENDING = "#8a90a6"
-HEADS = ("passed", "failed", "unknown")
+HEADS = ("passed", "failed", "attention", "unknown")
 
 
 def head_inner(head, state, uid="h"):
     """The head mark telling a big state (a summary, an empty state, a notification):
     holding the leaf checkbox when everything passed; frowning (the eye's top cut on a
     slant, the tuft laid back, the beak turned down) with the red X box when something
-    failed; holding the dashed box when the state is not known. Never in a table's row."""
-    frown = state == "failed"
+    failed, and with the amber "!" box when something was found that needs a person
+    (attention: it can be fixed); holding the dashed box when the state is not known.
+    Never in a table's row."""
+    frown = state in ("failed", "attention")
     lid = '<path d="M14 9 H31 V21.2 L14 12.6 Z" fill="#fff"/>' if frown else ""
     pupil = (f'<circle cx="23.3" cy="21.3" r="2.3" fill="{head}"/>' if frown
              else f'<circle cx="23.6" cy="20.2" r="2.4" fill="{head}"/>')
@@ -183,6 +187,9 @@ def head_inner(head, state, uid="h"):
                    f'<path d="M30.8 37 L34.5 40.7 L41.2 33.3" stroke="{WHITE}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'),
         "failed": (f'<rect x="26.5" y="27.5" width="19" height="19" rx="4.5" fill="{RED}"/>'
                    f'<path d="M32 33 L40 41 M40 33 L32 41" stroke="{WHITE}" stroke-width="3" stroke-linecap="round" fill="none"/>'),
+        "attention": (f'<rect x="26.5" y="27.5" width="19" height="19" rx="4.5" fill="{AMBER}"/>'
+                      f'<path d="M36 32 V38.4" stroke="{INK}" stroke-width="3" stroke-linecap="round" fill="none"/>'
+                      f'<circle cx="36" cy="42" r="1.7" fill="{INK}"/>'),
         "unknown": (f'<rect x="27.4" y="28.4" width="17.2" height="17.2" rx="4.2" fill="none" stroke="{PENDING}" stroke-width="1.8" stroke-dasharray="3 2.4"/>'
                     f'<circle cx="36" cy="37" r="1.7" fill="{PENDING}"/>'),
     }[state]
